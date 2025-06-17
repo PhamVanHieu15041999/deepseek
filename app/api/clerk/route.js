@@ -10,6 +10,7 @@ export async function POST(req) {
   const svixHeaders = {
     "svix-id": headerPayload.get("svix-id"),
     "svix-signature": headerPayload.get("svix-signature"),
+    "svix-timestamp": headerPayload.get("svix-timestamp"),
   };
 
   // Get the payload and verify it
@@ -22,9 +23,9 @@ export async function POST(req) {
 
   const userData = {
     _id: data.id,
-    email: data.email_addresses[0].email.address,
-    name: `${data.first_name} ${data.last_name}`,
-    image: data.image_url,
+    email: data.emailAddresses[0].emailAddress,
+    name: `${data.firstName} ${data.lastName}`,
+    image: data.imageUrl,
   };
 
   await connectDB();
@@ -34,7 +35,7 @@ export async function POST(req) {
       await User.create(userData);
       break;
     case "user.updated":
-      await User.finByIdAndUpdate(data.id, userData);
+      await User.findByIdAndUpdate(data.id, userData);
       break;
     case "user.deleted":
       await User.findByIdAndDelete(data.id);

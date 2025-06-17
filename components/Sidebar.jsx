@@ -8,6 +8,7 @@ import ChatLabel from "./ChatLabel";
 const Sidebar = ({ expand, setExpand }) => {
   const { openSignIn } = useClerk();
   const { user } = useAppConText();
+  console.log("userSidebar", user);
   const [openMenu, setOpenMenu] = useState({ id: 0, open: false });
 
   return (
