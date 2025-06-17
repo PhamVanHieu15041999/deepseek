@@ -23,10 +23,12 @@ export async function POST(req) {
 
   const userData = {
     _id: data.id,
-    email: data.emailAddresses[0].emailAddress,
-    name: `${data.firstName} ${data.lastName}`,
-    image: data.imageUrl,
+    email: data.email_addresses[0].email_address,
+    name: `${data.first_name} ${data.last_name}`,
+    image: data.image_url,
   };
+
+  console.log("aaaaaaaaaaaaaaaaaa", userData);
 
   await connectDB();
 
